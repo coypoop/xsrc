@@ -245,6 +245,8 @@ int amdgpu_bo_export(amdgpu_bo_handle bo,
 
 	case amdgpu_bo_handle_type_kms:
 		amdgpu_add_handle_to_table(bo);
+		/* fall through */
+	case amdgpu_bo_handle_type_kms_noimport:
 		*shared_handle = bo->handle;
 		return 0;
 
@@ -309,6 +311,7 @@ int amdgpu_bo_import(amdgpu_device_handle dev,
 		break;
 
 	case amdgpu_bo_handle_type_kms:
+	case amdgpu_bo_handle_type_kms_noimport:
 		/* Importing a KMS handle in not allowed. */
 		pthread_mutex_unlock(&dev->bo_table_mutex);
 		return -EPERM;
@@ -378,6 +381,7 @@ int amdgpu_bo_import(amdgpu_device_handle dev,
 		break;
 
 	case amdgpu_bo_handle_type_kms:
+	case amdgpu_bo_handle_type_kms_noimport:
 		assert(0); /* unreachable */
 	}
 
