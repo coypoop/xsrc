@@ -22,6 +22,7 @@
  */
 
 /* #if defined(MISSING_64BIT_ATOMICS) && defined(HAVE_PTHREAD) */
+#include <sys/types.h>
 #ifndef __HAVE_ATOMIC64_OPS
 
 #include <stdint.h>
@@ -36,7 +37,7 @@
 static pthread_mutex_t sync_mutex = PTHREAD_MUTEX_INITIALIZER;
 
 WEAK uint64_t
-__atomic_fetch_add_8(uintptr_t *ptr, uintptr_t val, int memorder)
+__atomic_fetch_add_8(long long *ptr, long long val, int memorder)
 {
    uint64_t r;
 
@@ -49,7 +50,7 @@ __atomic_fetch_add_8(uintptr_t *ptr, uintptr_t val, int memorder)
 }
 
 WEAK uint64_t
-__atomic_sub_fetch_8(uint64_t *ptr, uint64_t val, int memorder)
+__atomic_fetch_sub_8(long long *ptr, long long val, int memorder)
 {
    uint64_t r;
 
