@@ -56,12 +56,12 @@
 
 static void default_logger(int level, const char *fmt, ...)
 {
-   if (level <= _LOADER_WARNING) {
+   //if (level <= _LOADER_WARNING) {
       va_list args;
       va_start(args, fmt);
       vfprintf(stderr, fmt, args);
       va_end(args);
-   }
+   //}
 }
 
 static void (*log_)(int level, const char *fmt, ...) = default_logger;

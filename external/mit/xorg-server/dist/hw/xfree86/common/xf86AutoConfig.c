@@ -342,11 +342,7 @@ listPossibleVideoDrivers(XF86MatchedDrivers *md)
     xf86PciMatchDriver(md);
 #endif
 
-#if defined(__linux__)
-    xf86AddMatchedDriver(md, "modesetting");
-#endif
-
-#if defined(__NetBSD__) && (defined(__aarch64__) || defined(__arm__))
+#if defined(__linux__) || defined(__NetBSD__)
     xf86AddMatchedDriver(md, "modesetting");
 #endif
 
